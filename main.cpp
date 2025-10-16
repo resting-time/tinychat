@@ -6,10 +6,19 @@
 #include<cstring>
 #include<cstdio>
 #include<cerrno>
+#include<csignal>
+#include<atomic>
+
+std::atomic<bool> g_running{true};
 
 const int MAX_EVENTS=64;
 const int BUF_SIZE=1024;
 
+
+void signal_handler(int sig){
+    g_running=false;
+    printf("\n[%s] caught,exiting...\n",sig==SIGINT?"SIGINT":"SIGTERM");
+}
 
 int set_nonblock(int fd){
     return fcntl(fd,F_SETFL,fcntl(fd,F_GETFL)|O_NONBLOCK);
@@ -36,6 +45,10 @@ int main(){
 
 
     int epfd=epoll_create1(0);
+
+    signal(SIGINT,signal_handler);
+    signal(SIGTERM,signal_handler);
+
     struct epoll_event ev{},events[MAX_EVENTS];
     ev.data.fd=listen_fd;
     ev.events=EPOLLIN|EPOLLET;
@@ -43,8 +56,9 @@ int main(){
 
     printf("TinyChat epoll echo server listening on 8888\n");
 
-    while(true){
-        int nfds=epoll_wait(epfd,events,MAX_EVENTS,-1);
+    while(g_running){
+        int nfds=epoll_wait(epfd,events,MAX_EVENTS,1000);
+        if(!g_running)break;
         for(int i=0;i<nfds;++i){
             if(events[i].data.fd==listen_fd){
                 while(true){
@@ -78,5 +92,10 @@ int main(){
         }
         
     }
+
+    close(listen_fd);
+    close(epfd);
+    printf("TinyChat server exit gracefully.\n");
+
     return 0;
 }
