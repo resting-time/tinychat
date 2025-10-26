@@ -8,6 +8,8 @@
 #include<cerrno>
 #include<csignal>
 #include<atomic>
+#include"threadpool.h"
+ThreadPool g_tp;
 
 std::atomic<bool> g_running{true};
 
@@ -74,6 +76,8 @@ int main(){
                 }
             }else{
                 int fd=events[i].data.fd;
+                g_tp.enqueue([fd,epfd](){
+                             
                 char buf[BUF_SIZE];
                 while(true){
                     ssize_t n=read(fd,buf,sizeof(buf));
@@ -81,16 +85,15 @@ int main(){
                         write(fd,buf,n);
                     }else if(n==0||(n<0&&errno!=EAGAIN&&errno!=EWOULDBLOCK)){
                         close(fd);
-                        epoll_ctl(epfd,EPOLL_CTL_DEL,fd,nullptr);
                         break;
                     }else{
                         break;
                     }
                 }
-            }
+            });
     
         }
-        
+        }
     }
 
     close(listen_fd);
