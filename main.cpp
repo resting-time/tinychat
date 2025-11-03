@@ -9,7 +9,9 @@
 #include<csignal>
 #include<atomic>
 #include"threadpool.h"
+#include"redis_cli.h"
 ThreadPool g_tp;
+RedisCli g_redis;
 
 std::atomic<bool> g_running{true};
 
@@ -73,6 +75,8 @@ int main(){
                     ev.data.fd=conn;
                     ev.events=EPOLLIN|EPOLLET;
                     epoll_ctl(epfd,EPOLL_CTL_ADD,conn,&ev);
+                    std::string key="online:"+std::to_string(conn);
+                    g_redis.setex(key,60,"1");
                 }
             }else{
                 int fd=events[i].data.fd;
@@ -84,6 +88,8 @@ int main(){
                     if(n>0){
                         write(fd,buf,n);
                     }else if(n==0||(n<0&&errno!=EAGAIN&&errno!=EWOULDBLOCK)){
+                        std::string key="online:"+std::to_string(fd);
+                        g_redis.del(key);
                         close(fd);
                         break;
                     }else{
