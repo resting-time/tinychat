@@ -10,6 +10,9 @@
 #include<atomic>
 #include"threadpool.h"
 #include"redis_cli.h"
+#include"codec.h"
+#include"msg.pb.h"
+using namespace tc;
 ThreadPool g_tp;
 RedisCli g_redis;
 
@@ -82,19 +85,12 @@ int main(){
                 int fd=events[i].data.fd;
                 g_tp.enqueue([fd,epfd](){
                              
-                char buf[BUF_SIZE];
-                while(true){
-                    ssize_t n=read(fd,buf,sizeof(buf));
-                    if(n>0){
-                        write(fd,buf,n);
-                    }else if(n==0||(n<0&&errno!=EAGAIN&&errno!=EWOULDBLOCK)){
-                        std::string key="online:"+std::to_string(fd);
-                        g_redis.del(key);
-                        close(fd);
-                        break;
-                    }else{
-                        break;
-                    }
+                tc::Wrapper w;
+                if(recv_msg(fd,w)){
+                    tc::Wrapper resp;
+                    resp.set_msg_id(w.msg_id()+1);      //简单回显：req+1
+                    resp.set_payload(w.payload());
+                    send_msg(fd,resp);
                 }
             });
     

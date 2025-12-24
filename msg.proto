@@ -1,0 +1,16 @@
+syntax = "proto3";
+package tc;
+
+message LoginReq { string name = 1; }
+message LoginResp { uint32 uid = 1; }
+
+message ChatReq { string content = 1; }
+message ChatResp { uint32 uid = 1; string content = 2; }
+
+message HeartBeat { uint32 uid = 1; }
+
+// 统一外壳
+message Wrapper {
+  uint32 msg_id = 1;   // 1 login_req 2 login_resp 3 chat_req 4 chat_resp 5 heartbeat
+  bytes  payload  = 2; // 序列化后的子消息
+}
