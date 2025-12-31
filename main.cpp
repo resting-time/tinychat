@@ -16,6 +16,7 @@ using namespace tc;
 ThreadPool g_tp;
 RedisCli g_redis;
 
+std::atomic<uint32_t> g_uid{1};
 std::atomic<bool> g_running{true};
 
 const int MAX_EVENTS=64;
@@ -67,7 +68,7 @@ int main(){
         int nfds=epoll_wait(epfd,events,MAX_EVENTS,1000);
         if(!g_running)break;
         for(int i=0;i<nfds;++i){
-            if(events[i].data.fd==listen_fd){
+            if(events[i].data.fd==listen_fd){       //新连接
                 while(true){
                     int conn=accept(listen_fd,nullptr,nullptr);
                     if(conn<0){
@@ -81,17 +82,43 @@ int main(){
                     std::string key="online:"+std::to_string(conn);
                     g_redis.setex(key,60,"1");
                 }
-            }else{
+            }else{          //客户端可读
                 int fd=events[i].data.fd;
                 g_tp.enqueue([fd,epfd](){
-                             
-                tc::Wrapper w;
-                if(recv_msg(fd,w)){
-                    tc::Wrapper resp;
-                    resp.set_msg_id(w.msg_id()+1);      //简单回显：req+1
-                    resp.set_payload(w.payload());
-                    send_msg(fd,resp);
-                }
+                    tc::Wrapper w;
+                    if(!recv_msg(fd,w)){
+                        close(fd);
+                        return;
+                    }
+
+
+                    /*==========消息分发==============*/
+                    //1.心跳
+                    if(w.msg_id()==5){
+                        tc::HeartBeat hb;
+                        hb.ParseFromString(w.payload());
+                        std::string key="online:"+std::to_string(hb.uid());
+                        g_redis.setex(key,30,"1");      //续期30s
+                        return;                         //心跳不回报
+                    }
+                    //2.登录
+                    if(w.msg_id()==1){
+                        tc::LoginReq req;
+                        req.ParseFromString(w.payload());
+                        uint32_t uid=g_uid++;       //分配真实uid
+                        tc::LoginResp resp;
+                        resp.set_uid(uid);
+                        tc::Wrapper reply;
+                        reply.set_msg_id(2);
+                        reply.set_payload(resp.SerializeAsString());
+                        send_msg(fd,reply);
+                        return;
+                    }
+                    //3.其他消息（原回显）
+                    tc::Wrapper reply;
+                    reply.set_msg_id(w.msg_id()+1);
+                    reply.set_payload(w.payload());
+                    send_msg(fd,reply);
             });
     
         }
