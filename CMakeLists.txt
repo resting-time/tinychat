@@ -13,5 +13,5 @@ find_package(PkgConfig REQUIRED)
 pkg_check_modules(HIREDIS REQUIRED hiredis)
 
 target_include_directories(server PRIVATE ${HIREDIS_INCLUDE_DIRS})
-target_link_libraries(server ${Protobuf_LIBRARIES} ${HIREDIS_LIBRARIES} Threads::Threads)
+target_link_libraries(server ${Protobuf_LIBRARIES} ${HIREDIS_LIBRARIES} Threads::Threads mysqlcppconn)
 target_link_libraries(client ${Protobuf_LIBRARIES} Threads::Threads)
