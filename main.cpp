@@ -12,9 +12,12 @@
 #include"redis_cli.h"
 #include"codec.h"
 #include"msg.pb.h"
+#include"db.h"
+
 using namespace tc;
 ThreadPool g_tp;
 RedisCli g_redis;
+DbPool g_dbpool;        //10 连接，全局
 
 std::atomic<uint32_t> g_uid{1};
 std::atomic<bool> g_running{true};
@@ -84,7 +87,7 @@ int main(){
                 }
             }else{          //客户端可读
                 int fd=events[i].data.fd;
-                g_tp.enqueue([fd,epfd](){
+                g_tp.enqueue([fd](){
                     tc::Wrapper w;
                     if(!recv_msg(fd,w)){
                         close(fd);
@@ -93,19 +96,41 @@ int main(){
 
 
                     /*==========消息分发==============*/
-                    //1.心跳
-                    if(w.msg_id()==5){
-                        tc::HeartBeat hb;
-                        hb.ParseFromString(w.payload());
-                        std::string key="online:"+std::to_string(hb.uid());
-                        g_redis.setex(key,30,"1");      //续期30s
-                        return;                         //心跳不回报
+                    //0.注册请求
+                    if(w.msg_id()==6){
+                        tc::RegisterReq req;
+                        req.ParseFromString(w.payload());
+                        //简单哈希（生产用bcrypt）
+                        std::string pwd_hash=std::to_string(std::hash<std::string>{}(req.pwd()));
+                        uint32_t uid=db_register(g_dbpool,req.name(),pwd_hash);
+                        tc::RegisterResp resp;
+                        resp.set_uid(uid);     //0表示失败
+                        tc::Wrapper reply;
+                        reply.set_msg_id(7);
+                        reply.set_payload(resp.SerializeAsString());
+                        send_msg(fd,reply);
+                        return;
                     }
-                    //2.登录
+
+                    //1.登录请求（带密码）
                     if(w.msg_id()==1){
                         tc::LoginReq req;
                         req.ParseFromString(w.payload());
-                        uint32_t uid=g_uid++;       //分配真实uid
+                        std::string pwd_hash=std::to_string(std::hash<std::string>{}(req.pwd()));
+                        uint32_t uid=db_login(g_dbpool,req.name(),pwd_hash);
+                        if(uid==0){     //失败
+                            tc::LoginResp resp;
+                            resp.set_uid(0);
+                            tc::Wrapper reply;
+                            reply.set_msg_id(2);
+                            reply.set_payload(resp.SerializeAsString());
+                            send_msg(fd,reply);
+                            return;
+                        }
+
+                        //成功：写Redis+回包
+                        std::string key="online:"+std::to_string(uid);
+                        g_redis.setex(key,60,"1");
                         tc::LoginResp resp;
                         resp.set_uid(uid);
                         tc::Wrapper reply;
@@ -114,6 +139,16 @@ int main(){
                         send_msg(fd,reply);
                         return;
                     }
+
+                    //2.心跳
+                    if(w.msg_id()==5){
+                        tc::HeartBeat hb;
+                        hb.ParseFromString(w.payload());
+                        std::string key="online:"+std::to_string(hb.uid());
+                        g_redis.setex(key,30,"1");      //续期30s
+                        return;                         //心跳不回报
+                    }
+
                     //3.其他消息（原回显）
                     tc::Wrapper reply;
                     reply.set_msg_id(w.msg_id()+1);

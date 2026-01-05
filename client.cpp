@@ -17,7 +17,7 @@ int main(){
 
     /*1.登录请求*/
     tc::Wrapper w;
-    w.set_msg_id(1);                       // login_req
+    w.set_msg_id(6);                       // login_req
     tc::LoginReq req; req.set_name("tom");
     w.set_payload(req.SerializeAsString());
     if(!send_msg(fd, w)){
@@ -27,7 +27,7 @@ int main(){
 
     
 
-    /*2。收登录相应*/
+    /*2.收登录响应*/
     tc::Wrapper rx;
     if (!recv_msg(fd, rx) && rx.msg_id() != 2) {   // login_resp
         close(fd);
