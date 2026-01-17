@@ -17,7 +17,7 @@ public:
         for(size_t i=0;i<n;++i){
             try{
                 sql::Driver *driver=get_driver_instance();
-                std::unique_ptr<sql::Connection> conn(driver->connect("tcp://127.0.0.1:3306","root",""));
+                std::unique_ptr<sql::Connection> conn(driver->connect("tcp://127.0.0.1:3306","root","123456"));
                 conn->setSchema("tinychat");
                 pool.push_back(std::move(conn));
             }catch(sql::SQLException &e){

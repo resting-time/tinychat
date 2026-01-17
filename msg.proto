@@ -1,21 +1,56 @@
 syntax = "proto3";
 package tc;
 
-message LoginReq { string name = 1; string pwd = 2; }   // 重写：带密码
+message LoginReq { string name = 1; string pwd = 2; }
 message LoginResp { uint32 uid = 1; }
 
 message RegisterReq { string name = 1; string pwd = 2; }
 message RegisterResp { uint32 uid = 1; }
 
-message ChatReq { string content = 1; }
-message ChatResp { uint32 uid = 1; string content = 2; }
+message ChatReq {
+    string content = 1;
+    uint32 to_uid  = 2;   // 0 表示群聊
+    uint32 gid     = 3;   // 0 表示私聊
+}
+message ChatResp {
+    uint64 msg_id  = 1;
+    uint32 from_uid= 2;
+    uint32 to_uid  = 3;
+    uint32 gid     = 4;
+    string content = 5;
+}
 
 message HeartBeat { uint32 uid = 1; }
 
-// 统一外壳
-message Wrapper {
-  uint32 msg_id = 1;   // 1 login_req 2 login_resp 3 chat_req 4 chat_resp 5 heartbeat
-  bytes  payload  = 2; // 序列化后的子消息
+// === 新增群相关 ===
+message CreateGroupReq { string name = 1; }
+message CreateGroupResp { uint32 gid = 1; }   // 0 表示失败
+
+message JoinGroupReq { uint32 gid = 1; }
+message JoinGroupResp { bool ok = 1; }
+
+message LeaveGroupReq { uint32 gid = 1; }
+message LeaveGroupResp { bool ok = 1; }
+
+message ListGroupResp { repeated uint32 gids = 1; }
+
+message ListAllGroupsReq {}          // 空
+message ListAllGroupsResp {
+    repeated uint32 gid   = 1;
+    repeated string name  = 2;   // 与 gid 一一对应
 }
 
 
+
+// 统一外壳
+message Wrapper {
+    uint32 msg_id = 1;   // 1 login_req  2 login_resp
+    // 3 chat_req   4 chat_resp  5 heartbeat
+    // 6 register_req 7 register_resp
+    // 8 create_group_req  9 create_group_resp
+    // 10 join_group_req  11 join_group_resp
+    // 12 leave_group_req 13 leave_group_resp
+    // 14 list_group_resp
+    // 15 list_all_groups_req 16 list_all_groups_resp
+    bytes  payload  = 2;
+}

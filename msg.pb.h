@@ -38,9 +38,20 @@ void protobuf_ShutdownFile_msg_2eproto();
 
 class ChatReq;
 class ChatResp;
+class CreateGroupReq;
+class CreateGroupResp;
 class HeartBeat;
+class JoinGroupReq;
+class JoinGroupResp;
+class LeaveGroupReq;
+class LeaveGroupResp;
+class ListAllGroupsReq;
+class ListAllGroupsResp;
+class ListGroupResp;
 class LoginReq;
 class LoginResp;
+class RegisterReq;
+class RegisterResp;
 class Wrapper;
 
 // ===================================================================
@@ -116,12 +127,24 @@ class LoginReq : public ::google::protobuf::Message /* @@protoc_insertion_point(
   ::std::string* release_name();
   void set_allocated_name(::std::string* name);
 
+  // optional string pwd = 2;
+  void clear_pwd();
+  static const int kPwdFieldNumber = 2;
+  const ::std::string& pwd() const;
+  void set_pwd(const ::std::string& value);
+  void set_pwd(const char* value);
+  void set_pwd(const char* value, size_t size);
+  ::std::string* mutable_pwd();
+  ::std::string* release_pwd();
+  void set_allocated_pwd(::std::string* pwd);
+
   // @@protoc_insertion_point(class_scope:tc.LoginReq)
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   bool _is_default_instance_;
   ::google::protobuf::internal::ArenaStringPtr name_;
+  ::google::protobuf::internal::ArenaStringPtr pwd_;
   mutable int _cached_size_;
   friend void  protobuf_AddDesc_msg_2eproto();
   friend void protobuf_AssignDesc_msg_2eproto();
@@ -214,6 +237,187 @@ class LoginResp : public ::google::protobuf::Message /* @@protoc_insertion_point
 };
 // -------------------------------------------------------------------
 
+class RegisterReq : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:tc.RegisterReq) */ {
+ public:
+  RegisterReq();
+  virtual ~RegisterReq();
+
+  RegisterReq(const RegisterReq& from);
+
+  inline RegisterReq& operator=(const RegisterReq& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const RegisterReq& default_instance();
+
+  void Swap(RegisterReq* other);
+
+  // implements Message ----------------------------------------------
+
+  inline RegisterReq* New() const { return New(NULL); }
+
+  RegisterReq* New(::google::protobuf::Arena* arena) const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const RegisterReq& from);
+  void MergeFrom(const RegisterReq& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const {
+    return InternalSerializeWithCachedSizesToArray(false, output);
+  }
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  void InternalSwap(RegisterReq* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return _internal_metadata_.arena();
+  }
+  inline void* MaybeArenaPtr() const {
+    return _internal_metadata_.raw_arena_ptr();
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // optional string name = 1;
+  void clear_name();
+  static const int kNameFieldNumber = 1;
+  const ::std::string& name() const;
+  void set_name(const ::std::string& value);
+  void set_name(const char* value);
+  void set_name(const char* value, size_t size);
+  ::std::string* mutable_name();
+  ::std::string* release_name();
+  void set_allocated_name(::std::string* name);
+
+  // optional string pwd = 2;
+  void clear_pwd();
+  static const int kPwdFieldNumber = 2;
+  const ::std::string& pwd() const;
+  void set_pwd(const ::std::string& value);
+  void set_pwd(const char* value);
+  void set_pwd(const char* value, size_t size);
+  ::std::string* mutable_pwd();
+  ::std::string* release_pwd();
+  void set_allocated_pwd(::std::string* pwd);
+
+  // @@protoc_insertion_point(class_scope:tc.RegisterReq)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  bool _is_default_instance_;
+  ::google::protobuf::internal::ArenaStringPtr name_;
+  ::google::protobuf::internal::ArenaStringPtr pwd_;
+  mutable int _cached_size_;
+  friend void  protobuf_AddDesc_msg_2eproto();
+  friend void protobuf_AssignDesc_msg_2eproto();
+  friend void protobuf_ShutdownFile_msg_2eproto();
+
+  void InitAsDefaultInstance();
+  static RegisterReq* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class RegisterResp : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:tc.RegisterResp) */ {
+ public:
+  RegisterResp();
+  virtual ~RegisterResp();
+
+  RegisterResp(const RegisterResp& from);
+
+  inline RegisterResp& operator=(const RegisterResp& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const RegisterResp& default_instance();
+
+  void Swap(RegisterResp* other);
+
+  // implements Message ----------------------------------------------
+
+  inline RegisterResp* New() const { return New(NULL); }
+
+  RegisterResp* New(::google::protobuf::Arena* arena) const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const RegisterResp& from);
+  void MergeFrom(const RegisterResp& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const {
+    return InternalSerializeWithCachedSizesToArray(false, output);
+  }
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  void InternalSwap(RegisterResp* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return _internal_metadata_.arena();
+  }
+  inline void* MaybeArenaPtr() const {
+    return _internal_metadata_.raw_arena_ptr();
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // optional uint32 uid = 1;
+  void clear_uid();
+  static const int kUidFieldNumber = 1;
+  ::google::protobuf::uint32 uid() const;
+  void set_uid(::google::protobuf::uint32 value);
+
+  // @@protoc_insertion_point(class_scope:tc.RegisterResp)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  bool _is_default_instance_;
+  ::google::protobuf::uint32 uid_;
+  mutable int _cached_size_;
+  friend void  protobuf_AddDesc_msg_2eproto();
+  friend void protobuf_AssignDesc_msg_2eproto();
+  friend void protobuf_ShutdownFile_msg_2eproto();
+
+  void InitAsDefaultInstance();
+  static RegisterResp* default_instance_;
+};
+// -------------------------------------------------------------------
+
 class ChatReq : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:tc.ChatReq) */ {
  public:
   ChatReq();
@@ -285,12 +489,26 @@ class ChatReq : public ::google::protobuf::Message /* @@protoc_insertion_point(c
   ::std::string* release_content();
   void set_allocated_content(::std::string* content);
 
+  // optional uint32 to_uid = 2;
+  void clear_to_uid();
+  static const int kToUidFieldNumber = 2;
+  ::google::protobuf::uint32 to_uid() const;
+  void set_to_uid(::google::protobuf::uint32 value);
+
+  // optional uint32 gid = 3;
+  void clear_gid();
+  static const int kGidFieldNumber = 3;
+  ::google::protobuf::uint32 gid() const;
+  void set_gid(::google::protobuf::uint32 value);
+
   // @@protoc_insertion_point(class_scope:tc.ChatReq)
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   bool _is_default_instance_;
   ::google::protobuf::internal::ArenaStringPtr content_;
+  ::google::protobuf::uint32 to_uid_;
+  ::google::protobuf::uint32 gid_;
   mutable int _cached_size_;
   friend void  protobuf_AddDesc_msg_2eproto();
   friend void protobuf_AssignDesc_msg_2eproto();
@@ -361,15 +579,33 @@ class ChatResp : public ::google::protobuf::Message /* @@protoc_insertion_point(
 
   // accessors -------------------------------------------------------
 
-  // optional uint32 uid = 1;
-  void clear_uid();
-  static const int kUidFieldNumber = 1;
-  ::google::protobuf::uint32 uid() const;
-  void set_uid(::google::protobuf::uint32 value);
+  // optional uint64 msg_id = 1;
+  void clear_msg_id();
+  static const int kMsgIdFieldNumber = 1;
+  ::google::protobuf::uint64 msg_id() const;
+  void set_msg_id(::google::protobuf::uint64 value);
 
-  // optional string content = 2;
+  // optional uint32 from_uid = 2;
+  void clear_from_uid();
+  static const int kFromUidFieldNumber = 2;
+  ::google::protobuf::uint32 from_uid() const;
+  void set_from_uid(::google::protobuf::uint32 value);
+
+  // optional uint32 to_uid = 3;
+  void clear_to_uid();
+  static const int kToUidFieldNumber = 3;
+  ::google::protobuf::uint32 to_uid() const;
+  void set_to_uid(::google::protobuf::uint32 value);
+
+  // optional uint32 gid = 4;
+  void clear_gid();
+  static const int kGidFieldNumber = 4;
+  ::google::protobuf::uint32 gid() const;
+  void set_gid(::google::protobuf::uint32 value);
+
+  // optional string content = 5;
   void clear_content();
-  static const int kContentFieldNumber = 2;
+  static const int kContentFieldNumber = 5;
   const ::std::string& content() const;
   void set_content(const ::std::string& value);
   void set_content(const char* value);
@@ -383,8 +619,11 @@ class ChatResp : public ::google::protobuf::Message /* @@protoc_insertion_point(
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   bool _is_default_instance_;
+  ::google::protobuf::uint64 msg_id_;
+  ::google::protobuf::uint32 from_uid_;
+  ::google::protobuf::uint32 to_uid_;
   ::google::protobuf::internal::ArenaStringPtr content_;
-  ::google::protobuf::uint32 uid_;
+  ::google::protobuf::uint32 gid_;
   mutable int _cached_size_;
   friend void  protobuf_AddDesc_msg_2eproto();
   friend void protobuf_AssignDesc_msg_2eproto();
@@ -474,6 +713,773 @@ class HeartBeat : public ::google::protobuf::Message /* @@protoc_insertion_point
 
   void InitAsDefaultInstance();
   static HeartBeat* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class CreateGroupReq : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:tc.CreateGroupReq) */ {
+ public:
+  CreateGroupReq();
+  virtual ~CreateGroupReq();
+
+  CreateGroupReq(const CreateGroupReq& from);
+
+  inline CreateGroupReq& operator=(const CreateGroupReq& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const CreateGroupReq& default_instance();
+
+  void Swap(CreateGroupReq* other);
+
+  // implements Message ----------------------------------------------
+
+  inline CreateGroupReq* New() const { return New(NULL); }
+
+  CreateGroupReq* New(::google::protobuf::Arena* arena) const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const CreateGroupReq& from);
+  void MergeFrom(const CreateGroupReq& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const {
+    return InternalSerializeWithCachedSizesToArray(false, output);
+  }
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  void InternalSwap(CreateGroupReq* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return _internal_metadata_.arena();
+  }
+  inline void* MaybeArenaPtr() const {
+    return _internal_metadata_.raw_arena_ptr();
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // optional string name = 1;
+  void clear_name();
+  static const int kNameFieldNumber = 1;
+  const ::std::string& name() const;
+  void set_name(const ::std::string& value);
+  void set_name(const char* value);
+  void set_name(const char* value, size_t size);
+  ::std::string* mutable_name();
+  ::std::string* release_name();
+  void set_allocated_name(::std::string* name);
+
+  // @@protoc_insertion_point(class_scope:tc.CreateGroupReq)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  bool _is_default_instance_;
+  ::google::protobuf::internal::ArenaStringPtr name_;
+  mutable int _cached_size_;
+  friend void  protobuf_AddDesc_msg_2eproto();
+  friend void protobuf_AssignDesc_msg_2eproto();
+  friend void protobuf_ShutdownFile_msg_2eproto();
+
+  void InitAsDefaultInstance();
+  static CreateGroupReq* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class CreateGroupResp : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:tc.CreateGroupResp) */ {
+ public:
+  CreateGroupResp();
+  virtual ~CreateGroupResp();
+
+  CreateGroupResp(const CreateGroupResp& from);
+
+  inline CreateGroupResp& operator=(const CreateGroupResp& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const CreateGroupResp& default_instance();
+
+  void Swap(CreateGroupResp* other);
+
+  // implements Message ----------------------------------------------
+
+  inline CreateGroupResp* New() const { return New(NULL); }
+
+  CreateGroupResp* New(::google::protobuf::Arena* arena) const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const CreateGroupResp& from);
+  void MergeFrom(const CreateGroupResp& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const {
+    return InternalSerializeWithCachedSizesToArray(false, output);
+  }
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  void InternalSwap(CreateGroupResp* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return _internal_metadata_.arena();
+  }
+  inline void* MaybeArenaPtr() const {
+    return _internal_metadata_.raw_arena_ptr();
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // optional uint32 gid = 1;
+  void clear_gid();
+  static const int kGidFieldNumber = 1;
+  ::google::protobuf::uint32 gid() const;
+  void set_gid(::google::protobuf::uint32 value);
+
+  // @@protoc_insertion_point(class_scope:tc.CreateGroupResp)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  bool _is_default_instance_;
+  ::google::protobuf::uint32 gid_;
+  mutable int _cached_size_;
+  friend void  protobuf_AddDesc_msg_2eproto();
+  friend void protobuf_AssignDesc_msg_2eproto();
+  friend void protobuf_ShutdownFile_msg_2eproto();
+
+  void InitAsDefaultInstance();
+  static CreateGroupResp* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class JoinGroupReq : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:tc.JoinGroupReq) */ {
+ public:
+  JoinGroupReq();
+  virtual ~JoinGroupReq();
+
+  JoinGroupReq(const JoinGroupReq& from);
+
+  inline JoinGroupReq& operator=(const JoinGroupReq& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const JoinGroupReq& default_instance();
+
+  void Swap(JoinGroupReq* other);
+
+  // implements Message ----------------------------------------------
+
+  inline JoinGroupReq* New() const { return New(NULL); }
+
+  JoinGroupReq* New(::google::protobuf::Arena* arena) const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const JoinGroupReq& from);
+  void MergeFrom(const JoinGroupReq& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const {
+    return InternalSerializeWithCachedSizesToArray(false, output);
+  }
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  void InternalSwap(JoinGroupReq* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return _internal_metadata_.arena();
+  }
+  inline void* MaybeArenaPtr() const {
+    return _internal_metadata_.raw_arena_ptr();
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // optional uint32 gid = 1;
+  void clear_gid();
+  static const int kGidFieldNumber = 1;
+  ::google::protobuf::uint32 gid() const;
+  void set_gid(::google::protobuf::uint32 value);
+
+  // @@protoc_insertion_point(class_scope:tc.JoinGroupReq)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  bool _is_default_instance_;
+  ::google::protobuf::uint32 gid_;
+  mutable int _cached_size_;
+  friend void  protobuf_AddDesc_msg_2eproto();
+  friend void protobuf_AssignDesc_msg_2eproto();
+  friend void protobuf_ShutdownFile_msg_2eproto();
+
+  void InitAsDefaultInstance();
+  static JoinGroupReq* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class JoinGroupResp : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:tc.JoinGroupResp) */ {
+ public:
+  JoinGroupResp();
+  virtual ~JoinGroupResp();
+
+  JoinGroupResp(const JoinGroupResp& from);
+
+  inline JoinGroupResp& operator=(const JoinGroupResp& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const JoinGroupResp& default_instance();
+
+  void Swap(JoinGroupResp* other);
+
+  // implements Message ----------------------------------------------
+
+  inline JoinGroupResp* New() const { return New(NULL); }
+
+  JoinGroupResp* New(::google::protobuf::Arena* arena) const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const JoinGroupResp& from);
+  void MergeFrom(const JoinGroupResp& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const {
+    return InternalSerializeWithCachedSizesToArray(false, output);
+  }
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  void InternalSwap(JoinGroupResp* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return _internal_metadata_.arena();
+  }
+  inline void* MaybeArenaPtr() const {
+    return _internal_metadata_.raw_arena_ptr();
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // optional bool ok = 1;
+  void clear_ok();
+  static const int kOkFieldNumber = 1;
+  bool ok() const;
+  void set_ok(bool value);
+
+  // @@protoc_insertion_point(class_scope:tc.JoinGroupResp)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  bool _is_default_instance_;
+  bool ok_;
+  mutable int _cached_size_;
+  friend void  protobuf_AddDesc_msg_2eproto();
+  friend void protobuf_AssignDesc_msg_2eproto();
+  friend void protobuf_ShutdownFile_msg_2eproto();
+
+  void InitAsDefaultInstance();
+  static JoinGroupResp* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class LeaveGroupReq : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:tc.LeaveGroupReq) */ {
+ public:
+  LeaveGroupReq();
+  virtual ~LeaveGroupReq();
+
+  LeaveGroupReq(const LeaveGroupReq& from);
+
+  inline LeaveGroupReq& operator=(const LeaveGroupReq& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const LeaveGroupReq& default_instance();
+
+  void Swap(LeaveGroupReq* other);
+
+  // implements Message ----------------------------------------------
+
+  inline LeaveGroupReq* New() const { return New(NULL); }
+
+  LeaveGroupReq* New(::google::protobuf::Arena* arena) const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const LeaveGroupReq& from);
+  void MergeFrom(const LeaveGroupReq& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const {
+    return InternalSerializeWithCachedSizesToArray(false, output);
+  }
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  void InternalSwap(LeaveGroupReq* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return _internal_metadata_.arena();
+  }
+  inline void* MaybeArenaPtr() const {
+    return _internal_metadata_.raw_arena_ptr();
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // optional uint32 gid = 1;
+  void clear_gid();
+  static const int kGidFieldNumber = 1;
+  ::google::protobuf::uint32 gid() const;
+  void set_gid(::google::protobuf::uint32 value);
+
+  // @@protoc_insertion_point(class_scope:tc.LeaveGroupReq)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  bool _is_default_instance_;
+  ::google::protobuf::uint32 gid_;
+  mutable int _cached_size_;
+  friend void  protobuf_AddDesc_msg_2eproto();
+  friend void protobuf_AssignDesc_msg_2eproto();
+  friend void protobuf_ShutdownFile_msg_2eproto();
+
+  void InitAsDefaultInstance();
+  static LeaveGroupReq* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class LeaveGroupResp : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:tc.LeaveGroupResp) */ {
+ public:
+  LeaveGroupResp();
+  virtual ~LeaveGroupResp();
+
+  LeaveGroupResp(const LeaveGroupResp& from);
+
+  inline LeaveGroupResp& operator=(const LeaveGroupResp& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const LeaveGroupResp& default_instance();
+
+  void Swap(LeaveGroupResp* other);
+
+  // implements Message ----------------------------------------------
+
+  inline LeaveGroupResp* New() const { return New(NULL); }
+
+  LeaveGroupResp* New(::google::protobuf::Arena* arena) const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const LeaveGroupResp& from);
+  void MergeFrom(const LeaveGroupResp& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const {
+    return InternalSerializeWithCachedSizesToArray(false, output);
+  }
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  void InternalSwap(LeaveGroupResp* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return _internal_metadata_.arena();
+  }
+  inline void* MaybeArenaPtr() const {
+    return _internal_metadata_.raw_arena_ptr();
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // optional bool ok = 1;
+  void clear_ok();
+  static const int kOkFieldNumber = 1;
+  bool ok() const;
+  void set_ok(bool value);
+
+  // @@protoc_insertion_point(class_scope:tc.LeaveGroupResp)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  bool _is_default_instance_;
+  bool ok_;
+  mutable int _cached_size_;
+  friend void  protobuf_AddDesc_msg_2eproto();
+  friend void protobuf_AssignDesc_msg_2eproto();
+  friend void protobuf_ShutdownFile_msg_2eproto();
+
+  void InitAsDefaultInstance();
+  static LeaveGroupResp* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class ListGroupResp : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:tc.ListGroupResp) */ {
+ public:
+  ListGroupResp();
+  virtual ~ListGroupResp();
+
+  ListGroupResp(const ListGroupResp& from);
+
+  inline ListGroupResp& operator=(const ListGroupResp& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ListGroupResp& default_instance();
+
+  void Swap(ListGroupResp* other);
+
+  // implements Message ----------------------------------------------
+
+  inline ListGroupResp* New() const { return New(NULL); }
+
+  ListGroupResp* New(::google::protobuf::Arena* arena) const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const ListGroupResp& from);
+  void MergeFrom(const ListGroupResp& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const {
+    return InternalSerializeWithCachedSizesToArray(false, output);
+  }
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  void InternalSwap(ListGroupResp* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return _internal_metadata_.arena();
+  }
+  inline void* MaybeArenaPtr() const {
+    return _internal_metadata_.raw_arena_ptr();
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // repeated uint32 gids = 1;
+  int gids_size() const;
+  void clear_gids();
+  static const int kGidsFieldNumber = 1;
+  ::google::protobuf::uint32 gids(int index) const;
+  void set_gids(int index, ::google::protobuf::uint32 value);
+  void add_gids(::google::protobuf::uint32 value);
+  const ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >&
+      gids() const;
+  ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >*
+      mutable_gids();
+
+  // @@protoc_insertion_point(class_scope:tc.ListGroupResp)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  bool _is_default_instance_;
+  ::google::protobuf::RepeatedField< ::google::protobuf::uint32 > gids_;
+  mutable int _gids_cached_byte_size_;
+  mutable int _cached_size_;
+  friend void  protobuf_AddDesc_msg_2eproto();
+  friend void protobuf_AssignDesc_msg_2eproto();
+  friend void protobuf_ShutdownFile_msg_2eproto();
+
+  void InitAsDefaultInstance();
+  static ListGroupResp* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class ListAllGroupsReq : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:tc.ListAllGroupsReq) */ {
+ public:
+  ListAllGroupsReq();
+  virtual ~ListAllGroupsReq();
+
+  ListAllGroupsReq(const ListAllGroupsReq& from);
+
+  inline ListAllGroupsReq& operator=(const ListAllGroupsReq& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ListAllGroupsReq& default_instance();
+
+  void Swap(ListAllGroupsReq* other);
+
+  // implements Message ----------------------------------------------
+
+  inline ListAllGroupsReq* New() const { return New(NULL); }
+
+  ListAllGroupsReq* New(::google::protobuf::Arena* arena) const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const ListAllGroupsReq& from);
+  void MergeFrom(const ListAllGroupsReq& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const {
+    return InternalSerializeWithCachedSizesToArray(false, output);
+  }
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  void InternalSwap(ListAllGroupsReq* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return _internal_metadata_.arena();
+  }
+  inline void* MaybeArenaPtr() const {
+    return _internal_metadata_.raw_arena_ptr();
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // @@protoc_insertion_point(class_scope:tc.ListAllGroupsReq)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  bool _is_default_instance_;
+  mutable int _cached_size_;
+  friend void  protobuf_AddDesc_msg_2eproto();
+  friend void protobuf_AssignDesc_msg_2eproto();
+  friend void protobuf_ShutdownFile_msg_2eproto();
+
+  void InitAsDefaultInstance();
+  static ListAllGroupsReq* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class ListAllGroupsResp : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:tc.ListAllGroupsResp) */ {
+ public:
+  ListAllGroupsResp();
+  virtual ~ListAllGroupsResp();
+
+  ListAllGroupsResp(const ListAllGroupsResp& from);
+
+  inline ListAllGroupsResp& operator=(const ListAllGroupsResp& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ListAllGroupsResp& default_instance();
+
+  void Swap(ListAllGroupsResp* other);
+
+  // implements Message ----------------------------------------------
+
+  inline ListAllGroupsResp* New() const { return New(NULL); }
+
+  ListAllGroupsResp* New(::google::protobuf::Arena* arena) const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const ListAllGroupsResp& from);
+  void MergeFrom(const ListAllGroupsResp& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const {
+    return InternalSerializeWithCachedSizesToArray(false, output);
+  }
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  void InternalSwap(ListAllGroupsResp* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return _internal_metadata_.arena();
+  }
+  inline void* MaybeArenaPtr() const {
+    return _internal_metadata_.raw_arena_ptr();
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // repeated uint32 gid = 1;
+  int gid_size() const;
+  void clear_gid();
+  static const int kGidFieldNumber = 1;
+  ::google::protobuf::uint32 gid(int index) const;
+  void set_gid(int index, ::google::protobuf::uint32 value);
+  void add_gid(::google::protobuf::uint32 value);
+  const ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >&
+      gid() const;
+  ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >*
+      mutable_gid();
+
+  // repeated string name = 2;
+  int name_size() const;
+  void clear_name();
+  static const int kNameFieldNumber = 2;
+  const ::std::string& name(int index) const;
+  ::std::string* mutable_name(int index);
+  void set_name(int index, const ::std::string& value);
+  void set_name(int index, const char* value);
+  void set_name(int index, const char* value, size_t size);
+  ::std::string* add_name();
+  void add_name(const ::std::string& value);
+  void add_name(const char* value);
+  void add_name(const char* value, size_t size);
+  const ::google::protobuf::RepeatedPtrField< ::std::string>& name() const;
+  ::google::protobuf::RepeatedPtrField< ::std::string>* mutable_name();
+
+  // @@protoc_insertion_point(class_scope:tc.ListAllGroupsResp)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  bool _is_default_instance_;
+  ::google::protobuf::RepeatedField< ::google::protobuf::uint32 > gid_;
+  mutable int _gid_cached_byte_size_;
+  ::google::protobuf::RepeatedPtrField< ::std::string> name_;
+  mutable int _cached_size_;
+  friend void  protobuf_AddDesc_msg_2eproto();
+  friend void protobuf_AssignDesc_msg_2eproto();
+  friend void protobuf_ShutdownFile_msg_2eproto();
+
+  void InitAsDefaultInstance();
+  static ListAllGroupsResp* default_instance_;
 };
 // -------------------------------------------------------------------
 
@@ -621,6 +1627,50 @@ inline void LoginReq::set_allocated_name(::std::string* name) {
   // @@protoc_insertion_point(field_set_allocated:tc.LoginReq.name)
 }
 
+// optional string pwd = 2;
+inline void LoginReq::clear_pwd() {
+  pwd_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& LoginReq::pwd() const {
+  // @@protoc_insertion_point(field_get:tc.LoginReq.pwd)
+  return pwd_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void LoginReq::set_pwd(const ::std::string& value) {
+  
+  pwd_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:tc.LoginReq.pwd)
+}
+inline void LoginReq::set_pwd(const char* value) {
+  
+  pwd_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:tc.LoginReq.pwd)
+}
+inline void LoginReq::set_pwd(const char* value, size_t size) {
+  
+  pwd_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:tc.LoginReq.pwd)
+}
+inline ::std::string* LoginReq::mutable_pwd() {
+  
+  // @@protoc_insertion_point(field_mutable:tc.LoginReq.pwd)
+  return pwd_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* LoginReq::release_pwd() {
+  // @@protoc_insertion_point(field_release:tc.LoginReq.pwd)
+  
+  return pwd_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void LoginReq::set_allocated_pwd(::std::string* pwd) {
+  if (pwd != NULL) {
+    
+  } else {
+    
+  }
+  pwd_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), pwd);
+  // @@protoc_insertion_point(field_set_allocated:tc.LoginReq.pwd)
+}
+
 // -------------------------------------------------------------------
 
 // LoginResp
@@ -637,6 +1687,116 @@ inline void LoginResp::set_uid(::google::protobuf::uint32 value) {
   
   uid_ = value;
   // @@protoc_insertion_point(field_set:tc.LoginResp.uid)
+}
+
+// -------------------------------------------------------------------
+
+// RegisterReq
+
+// optional string name = 1;
+inline void RegisterReq::clear_name() {
+  name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& RegisterReq::name() const {
+  // @@protoc_insertion_point(field_get:tc.RegisterReq.name)
+  return name_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void RegisterReq::set_name(const ::std::string& value) {
+  
+  name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:tc.RegisterReq.name)
+}
+inline void RegisterReq::set_name(const char* value) {
+  
+  name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:tc.RegisterReq.name)
+}
+inline void RegisterReq::set_name(const char* value, size_t size) {
+  
+  name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:tc.RegisterReq.name)
+}
+inline ::std::string* RegisterReq::mutable_name() {
+  
+  // @@protoc_insertion_point(field_mutable:tc.RegisterReq.name)
+  return name_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* RegisterReq::release_name() {
+  // @@protoc_insertion_point(field_release:tc.RegisterReq.name)
+  
+  return name_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void RegisterReq::set_allocated_name(::std::string* name) {
+  if (name != NULL) {
+    
+  } else {
+    
+  }
+  name_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), name);
+  // @@protoc_insertion_point(field_set_allocated:tc.RegisterReq.name)
+}
+
+// optional string pwd = 2;
+inline void RegisterReq::clear_pwd() {
+  pwd_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& RegisterReq::pwd() const {
+  // @@protoc_insertion_point(field_get:tc.RegisterReq.pwd)
+  return pwd_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void RegisterReq::set_pwd(const ::std::string& value) {
+  
+  pwd_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:tc.RegisterReq.pwd)
+}
+inline void RegisterReq::set_pwd(const char* value) {
+  
+  pwd_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:tc.RegisterReq.pwd)
+}
+inline void RegisterReq::set_pwd(const char* value, size_t size) {
+  
+  pwd_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:tc.RegisterReq.pwd)
+}
+inline ::std::string* RegisterReq::mutable_pwd() {
+  
+  // @@protoc_insertion_point(field_mutable:tc.RegisterReq.pwd)
+  return pwd_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* RegisterReq::release_pwd() {
+  // @@protoc_insertion_point(field_release:tc.RegisterReq.pwd)
+  
+  return pwd_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void RegisterReq::set_allocated_pwd(::std::string* pwd) {
+  if (pwd != NULL) {
+    
+  } else {
+    
+  }
+  pwd_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), pwd);
+  // @@protoc_insertion_point(field_set_allocated:tc.RegisterReq.pwd)
+}
+
+// -------------------------------------------------------------------
+
+// RegisterResp
+
+// optional uint32 uid = 1;
+inline void RegisterResp::clear_uid() {
+  uid_ = 0u;
+}
+inline ::google::protobuf::uint32 RegisterResp::uid() const {
+  // @@protoc_insertion_point(field_get:tc.RegisterResp.uid)
+  return uid_;
+}
+inline void RegisterResp::set_uid(::google::protobuf::uint32 value) {
+  
+  uid_ = value;
+  // @@protoc_insertion_point(field_set:tc.RegisterResp.uid)
 }
 
 // -------------------------------------------------------------------
@@ -687,25 +1847,95 @@ inline void ChatReq::set_allocated_content(::std::string* content) {
   // @@protoc_insertion_point(field_set_allocated:tc.ChatReq.content)
 }
 
+// optional uint32 to_uid = 2;
+inline void ChatReq::clear_to_uid() {
+  to_uid_ = 0u;
+}
+inline ::google::protobuf::uint32 ChatReq::to_uid() const {
+  // @@protoc_insertion_point(field_get:tc.ChatReq.to_uid)
+  return to_uid_;
+}
+inline void ChatReq::set_to_uid(::google::protobuf::uint32 value) {
+  
+  to_uid_ = value;
+  // @@protoc_insertion_point(field_set:tc.ChatReq.to_uid)
+}
+
+// optional uint32 gid = 3;
+inline void ChatReq::clear_gid() {
+  gid_ = 0u;
+}
+inline ::google::protobuf::uint32 ChatReq::gid() const {
+  // @@protoc_insertion_point(field_get:tc.ChatReq.gid)
+  return gid_;
+}
+inline void ChatReq::set_gid(::google::protobuf::uint32 value) {
+  
+  gid_ = value;
+  // @@protoc_insertion_point(field_set:tc.ChatReq.gid)
+}
+
 // -------------------------------------------------------------------
 
 // ChatResp
 
-// optional uint32 uid = 1;
-inline void ChatResp::clear_uid() {
-  uid_ = 0u;
+// optional uint64 msg_id = 1;
+inline void ChatResp::clear_msg_id() {
+  msg_id_ = GOOGLE_ULONGLONG(0);
 }
-inline ::google::protobuf::uint32 ChatResp::uid() const {
-  // @@protoc_insertion_point(field_get:tc.ChatResp.uid)
-  return uid_;
+inline ::google::protobuf::uint64 ChatResp::msg_id() const {
+  // @@protoc_insertion_point(field_get:tc.ChatResp.msg_id)
+  return msg_id_;
 }
-inline void ChatResp::set_uid(::google::protobuf::uint32 value) {
+inline void ChatResp::set_msg_id(::google::protobuf::uint64 value) {
   
-  uid_ = value;
-  // @@protoc_insertion_point(field_set:tc.ChatResp.uid)
+  msg_id_ = value;
+  // @@protoc_insertion_point(field_set:tc.ChatResp.msg_id)
 }
 
-// optional string content = 2;
+// optional uint32 from_uid = 2;
+inline void ChatResp::clear_from_uid() {
+  from_uid_ = 0u;
+}
+inline ::google::protobuf::uint32 ChatResp::from_uid() const {
+  // @@protoc_insertion_point(field_get:tc.ChatResp.from_uid)
+  return from_uid_;
+}
+inline void ChatResp::set_from_uid(::google::protobuf::uint32 value) {
+  
+  from_uid_ = value;
+  // @@protoc_insertion_point(field_set:tc.ChatResp.from_uid)
+}
+
+// optional uint32 to_uid = 3;
+inline void ChatResp::clear_to_uid() {
+  to_uid_ = 0u;
+}
+inline ::google::protobuf::uint32 ChatResp::to_uid() const {
+  // @@protoc_insertion_point(field_get:tc.ChatResp.to_uid)
+  return to_uid_;
+}
+inline void ChatResp::set_to_uid(::google::protobuf::uint32 value) {
+  
+  to_uid_ = value;
+  // @@protoc_insertion_point(field_set:tc.ChatResp.to_uid)
+}
+
+// optional uint32 gid = 4;
+inline void ChatResp::clear_gid() {
+  gid_ = 0u;
+}
+inline ::google::protobuf::uint32 ChatResp::gid() const {
+  // @@protoc_insertion_point(field_get:tc.ChatResp.gid)
+  return gid_;
+}
+inline void ChatResp::set_gid(::google::protobuf::uint32 value) {
+  
+  gid_ = value;
+  // @@protoc_insertion_point(field_set:tc.ChatResp.gid)
+}
+
+// optional string content = 5;
 inline void ChatResp::clear_content() {
   content_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -765,6 +1995,271 @@ inline void HeartBeat::set_uid(::google::protobuf::uint32 value) {
   
   uid_ = value;
   // @@protoc_insertion_point(field_set:tc.HeartBeat.uid)
+}
+
+// -------------------------------------------------------------------
+
+// CreateGroupReq
+
+// optional string name = 1;
+inline void CreateGroupReq::clear_name() {
+  name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& CreateGroupReq::name() const {
+  // @@protoc_insertion_point(field_get:tc.CreateGroupReq.name)
+  return name_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void CreateGroupReq::set_name(const ::std::string& value) {
+  
+  name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:tc.CreateGroupReq.name)
+}
+inline void CreateGroupReq::set_name(const char* value) {
+  
+  name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:tc.CreateGroupReq.name)
+}
+inline void CreateGroupReq::set_name(const char* value, size_t size) {
+  
+  name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:tc.CreateGroupReq.name)
+}
+inline ::std::string* CreateGroupReq::mutable_name() {
+  
+  // @@protoc_insertion_point(field_mutable:tc.CreateGroupReq.name)
+  return name_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* CreateGroupReq::release_name() {
+  // @@protoc_insertion_point(field_release:tc.CreateGroupReq.name)
+  
+  return name_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void CreateGroupReq::set_allocated_name(::std::string* name) {
+  if (name != NULL) {
+    
+  } else {
+    
+  }
+  name_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), name);
+  // @@protoc_insertion_point(field_set_allocated:tc.CreateGroupReq.name)
+}
+
+// -------------------------------------------------------------------
+
+// CreateGroupResp
+
+// optional uint32 gid = 1;
+inline void CreateGroupResp::clear_gid() {
+  gid_ = 0u;
+}
+inline ::google::protobuf::uint32 CreateGroupResp::gid() const {
+  // @@protoc_insertion_point(field_get:tc.CreateGroupResp.gid)
+  return gid_;
+}
+inline void CreateGroupResp::set_gid(::google::protobuf::uint32 value) {
+  
+  gid_ = value;
+  // @@protoc_insertion_point(field_set:tc.CreateGroupResp.gid)
+}
+
+// -------------------------------------------------------------------
+
+// JoinGroupReq
+
+// optional uint32 gid = 1;
+inline void JoinGroupReq::clear_gid() {
+  gid_ = 0u;
+}
+inline ::google::protobuf::uint32 JoinGroupReq::gid() const {
+  // @@protoc_insertion_point(field_get:tc.JoinGroupReq.gid)
+  return gid_;
+}
+inline void JoinGroupReq::set_gid(::google::protobuf::uint32 value) {
+  
+  gid_ = value;
+  // @@protoc_insertion_point(field_set:tc.JoinGroupReq.gid)
+}
+
+// -------------------------------------------------------------------
+
+// JoinGroupResp
+
+// optional bool ok = 1;
+inline void JoinGroupResp::clear_ok() {
+  ok_ = false;
+}
+inline bool JoinGroupResp::ok() const {
+  // @@protoc_insertion_point(field_get:tc.JoinGroupResp.ok)
+  return ok_;
+}
+inline void JoinGroupResp::set_ok(bool value) {
+  
+  ok_ = value;
+  // @@protoc_insertion_point(field_set:tc.JoinGroupResp.ok)
+}
+
+// -------------------------------------------------------------------
+
+// LeaveGroupReq
+
+// optional uint32 gid = 1;
+inline void LeaveGroupReq::clear_gid() {
+  gid_ = 0u;
+}
+inline ::google::protobuf::uint32 LeaveGroupReq::gid() const {
+  // @@protoc_insertion_point(field_get:tc.LeaveGroupReq.gid)
+  return gid_;
+}
+inline void LeaveGroupReq::set_gid(::google::protobuf::uint32 value) {
+  
+  gid_ = value;
+  // @@protoc_insertion_point(field_set:tc.LeaveGroupReq.gid)
+}
+
+// -------------------------------------------------------------------
+
+// LeaveGroupResp
+
+// optional bool ok = 1;
+inline void LeaveGroupResp::clear_ok() {
+  ok_ = false;
+}
+inline bool LeaveGroupResp::ok() const {
+  // @@protoc_insertion_point(field_get:tc.LeaveGroupResp.ok)
+  return ok_;
+}
+inline void LeaveGroupResp::set_ok(bool value) {
+  
+  ok_ = value;
+  // @@protoc_insertion_point(field_set:tc.LeaveGroupResp.ok)
+}
+
+// -------------------------------------------------------------------
+
+// ListGroupResp
+
+// repeated uint32 gids = 1;
+inline int ListGroupResp::gids_size() const {
+  return gids_.size();
+}
+inline void ListGroupResp::clear_gids() {
+  gids_.Clear();
+}
+inline ::google::protobuf::uint32 ListGroupResp::gids(int index) const {
+  // @@protoc_insertion_point(field_get:tc.ListGroupResp.gids)
+  return gids_.Get(index);
+}
+inline void ListGroupResp::set_gids(int index, ::google::protobuf::uint32 value) {
+  gids_.Set(index, value);
+  // @@protoc_insertion_point(field_set:tc.ListGroupResp.gids)
+}
+inline void ListGroupResp::add_gids(::google::protobuf::uint32 value) {
+  gids_.Add(value);
+  // @@protoc_insertion_point(field_add:tc.ListGroupResp.gids)
+}
+inline const ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >&
+ListGroupResp::gids() const {
+  // @@protoc_insertion_point(field_list:tc.ListGroupResp.gids)
+  return gids_;
+}
+inline ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >*
+ListGroupResp::mutable_gids() {
+  // @@protoc_insertion_point(field_mutable_list:tc.ListGroupResp.gids)
+  return &gids_;
+}
+
+// -------------------------------------------------------------------
+
+// ListAllGroupsReq
+
+// -------------------------------------------------------------------
+
+// ListAllGroupsResp
+
+// repeated uint32 gid = 1;
+inline int ListAllGroupsResp::gid_size() const {
+  return gid_.size();
+}
+inline void ListAllGroupsResp::clear_gid() {
+  gid_.Clear();
+}
+inline ::google::protobuf::uint32 ListAllGroupsResp::gid(int index) const {
+  // @@protoc_insertion_point(field_get:tc.ListAllGroupsResp.gid)
+  return gid_.Get(index);
+}
+inline void ListAllGroupsResp::set_gid(int index, ::google::protobuf::uint32 value) {
+  gid_.Set(index, value);
+  // @@protoc_insertion_point(field_set:tc.ListAllGroupsResp.gid)
+}
+inline void ListAllGroupsResp::add_gid(::google::protobuf::uint32 value) {
+  gid_.Add(value);
+  // @@protoc_insertion_point(field_add:tc.ListAllGroupsResp.gid)
+}
+inline const ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >&
+ListAllGroupsResp::gid() const {
+  // @@protoc_insertion_point(field_list:tc.ListAllGroupsResp.gid)
+  return gid_;
+}
+inline ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >*
+ListAllGroupsResp::mutable_gid() {
+  // @@protoc_insertion_point(field_mutable_list:tc.ListAllGroupsResp.gid)
+  return &gid_;
+}
+
+// repeated string name = 2;
+inline int ListAllGroupsResp::name_size() const {
+  return name_.size();
+}
+inline void ListAllGroupsResp::clear_name() {
+  name_.Clear();
+}
+inline const ::std::string& ListAllGroupsResp::name(int index) const {
+  // @@protoc_insertion_point(field_get:tc.ListAllGroupsResp.name)
+  return name_.Get(index);
+}
+inline ::std::string* ListAllGroupsResp::mutable_name(int index) {
+  // @@protoc_insertion_point(field_mutable:tc.ListAllGroupsResp.name)
+  return name_.Mutable(index);
+}
+inline void ListAllGroupsResp::set_name(int index, const ::std::string& value) {
+  // @@protoc_insertion_point(field_set:tc.ListAllGroupsResp.name)
+  name_.Mutable(index)->assign(value);
+}
+inline void ListAllGroupsResp::set_name(int index, const char* value) {
+  name_.Mutable(index)->assign(value);
+  // @@protoc_insertion_point(field_set_char:tc.ListAllGroupsResp.name)
+}
+inline void ListAllGroupsResp::set_name(int index, const char* value, size_t size) {
+  name_.Mutable(index)->assign(
+    reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:tc.ListAllGroupsResp.name)
+}
+inline ::std::string* ListAllGroupsResp::add_name() {
+  // @@protoc_insertion_point(field_add_mutable:tc.ListAllGroupsResp.name)
+  return name_.Add();
+}
+inline void ListAllGroupsResp::add_name(const ::std::string& value) {
+  name_.Add()->assign(value);
+  // @@protoc_insertion_point(field_add:tc.ListAllGroupsResp.name)
+}
+inline void ListAllGroupsResp::add_name(const char* value) {
+  name_.Add()->assign(value);
+  // @@protoc_insertion_point(field_add_char:tc.ListAllGroupsResp.name)
+}
+inline void ListAllGroupsResp::add_name(const char* value, size_t size) {
+  name_.Add()->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_add_pointer:tc.ListAllGroupsResp.name)
+}
+inline const ::google::protobuf::RepeatedPtrField< ::std::string>&
+ListAllGroupsResp::name() const {
+  // @@protoc_insertion_point(field_list:tc.ListAllGroupsResp.name)
+  return name_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::std::string>*
+ListAllGroupsResp::mutable_name() {
+  // @@protoc_insertion_point(field_mutable_list:tc.ListAllGroupsResp.name)
+  return &name_;
 }
 
 // -------------------------------------------------------------------
@@ -830,6 +2325,28 @@ inline void Wrapper::set_allocated_payload(::std::string* payload) {
 }
 
 #endif  // !PROTOBUF_INLINE_NOT_IN_HEADERS
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------
